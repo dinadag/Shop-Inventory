@@ -24,7 +24,7 @@ function App() {
 
 
   const fetchProducts = async (query = '') => {
-    const res = await fetch(`https://shop-inventory-p5gt.onrender.com//products${query ? '?search=' + query : ''}`);
+    const res = await fetch(`https://shop-inventory-p5gt.onrender.com/products${query ? '?search=' + query : ''}`);
     const data = await res.json();
     setProducts(data);
   };
@@ -101,7 +101,7 @@ function App() {
     const [error, setError] = useState('');
 
     const login = async () => {
-      const res = await fetch('https://shop-inventory-p5gt.onrender.com//login', {
+      const res = await fetch('https://shop-inventory-p5gt.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -131,7 +131,7 @@ function App() {
     const [password, setPassword] = useState('');
 
     const register = async () => {
-      const res = await fetch('https://shop-inventory-p5gt.onrender.com//register', {
+      const res = await fetch('https://shop-inventory-p5gt.onrender.com/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -160,7 +160,7 @@ function App() {
 
     const checkout = async () => {
       if (cart.length === 0) return alert('Cart is empty!');
-      const res = await fetch('https://shop-inventory-p5gt.onrender.com//orders', {
+      const res = await fetch('https://shop-inventory-p5gt.onrender.com/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, items: cart, paymentMethod: payment })
@@ -199,7 +199,7 @@ function App() {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-      fetch(`https://shop-inventory-p5gt.onrender.com//orders?userId=${user.id}`)
+      fetch(`https://shop-inventory-p5gt.onrender.com/orders?userId=${user.id}`)
         .then(res => res.json())
         .then(data => setOrders(data));
     }, []);
@@ -229,7 +229,7 @@ function App() {
     const [stock, setStock] = useState('');
 
     const addProduct = async () => {
-      await fetch('https://shop-inventory-p5gt.onrender.com//products', {
+      await fetch('https://shop-inventory-p5gt.onrender.com/products', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description: desc, price, stock })
@@ -239,7 +239,7 @@ function App() {
     };
 
     const deleteProduct = async (id) => {
-      await fetch(`https://shop-inventory-p5gt.onrender.com//products/${id}`, { method: 'DELETE' });
+      await fetch(`https://shop-inventory-p5gt.onrender.com/products/${id}`, { method: 'DELETE' });
       fetchProducts();
     };
 
